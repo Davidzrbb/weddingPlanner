@@ -1,0 +1,72 @@
+<form class="wrapper-search" style="margin-top: 5%">
+  <input id="table-filtering-search" class="search__input" type="text" [formControl]="filter"
+         placeholder="Recherche"/>
+  <br>
+  <br>
+</form>
+<div class="container all-todo">
+  <div class="wrapper" *ngIf="(categories$ | async) as categories ">
+    <div class="size-wrapper" *ngFor="let category of categories">
+      <div id="formContent"
+           [ngClass]="{'custom-dropdown-toggle-low custom-dropdown-toggle-unsink': !category.deleteMode && !category.state && category.priority === 'faible', 'custom-dropdown-toggle-medium custom-dropdown-toggle-unsink':!category.deleteMode && !category.state && category.priority === 'moyen', 'custom-dropdown-toggle-high custom-dropdown-toggle-unsink':!category.deleteMode && !category.state && category.priority === 'urgent','custom-dropdown-toggle-valid': category.state,'fall' : category.deleteMode}">
+        <ng-container *ngIf="!category.editMode">
+          <div style="width: 15%; overflow:hidden">
+            <strong>
+              <ngb-highlight [result]="category.name" [term]="filter.value" style="cursor: pointer"></ngb-highlight>
+            </strong>
+          </div>
+
+          <div style="display: flex; flex-direction: row">
+            <fa-icon [icon]="check" style="color: green; margin-right: 80%; cursor: pointer"
+                     (click)="changeState(category)"></fa-icon>
+            <fa-icon [icon]="pencil" style="margin-right: 80%;cursor: pointer ; color:orangered"
+                     (click)="editedCategory(category)"></fa-icon>
+            <fa-icon [icon]="trash" style="color: red; cursor: pointer" (click)="deleteCategory(category)"></fa-icon>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="category.editMode">
+          <div>
+            <input style="border: none;padding:5px" type="text" value="{{category.name}}" #updateName/>
+          </div>
+          <div>
+            <select #selectPriority>
+              <option value="faible" [selected]="category.priority === 'faible'">Faible</option>
+              <option value="moyen" [selected]="category.priority === 'moyen'">Moyen</option>
+              <option value="urgent" [selected]="category.priority === 'urgent'">Urgent</option>
+            </select>
+          </div>
+          <div style="display: flex; flex-direction: row">
+            <fa-icon [icon]="check" style="color: green; margin-top: 50%; cursor: pointer"
+                     (click)="updateCategory(category ,updateName.value,selectPriority.value)"></fa-icon>
+          </div>
+        </ng-container>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="input-group mt-3 mb-3 container add-btn">
+  <div style="display: flex; width: 100%">
+    <div class="input-icons">
+      <fa-icon [icon]="plus" class="icon" (click)="addCategories(addInput.value)"></fa-icon>
+      <input type="text" class="form-control input-add" placeholder="Ajouter une tache..."
+             #addInput (keydown.enter)="addCategories(addInput.value)">
+    </div>
+
+    <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+      <button type="button" class="btn btn" ngbDropdownToggle
+              [ngClass]="{'custom-dropdown-toggle-low': valueSelected === 'Faible', 'custom-dropdown-toggle-medium': valueSelected === 'Moyen', 'custom-dropdown-toggle-high': valueSelected === 'Urgent'}">
+        {{valueSelected}}
+      </button>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button ngbDropdownItem class="btn-low" (click)="selectValue('Faible')">Faible</button>
+        <button ngbDropdownItem class="btn-medium" (click)="selectValue('Moyen')">Moyen</button>
+        <button ngbDropdownItem class="btn-high" (click)="selectValue('Urgent')">Urgent</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

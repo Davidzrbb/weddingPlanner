@@ -1,0 +1,23 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent" class="size-wrapper">
+    <p *ngIf="errorMessage.error">
+      <ngb-alert [dismissible]="true" (closed)="closeAlert()">
+        <strong>Attention !</strong> {{errorMessage.message}}.
+      </ngb-alert>
+    </p>
+    <br>
+    <div class="fadeIn">
+      <h3>Connexion</h3>
+      <br>
+    </div>
+    <div class="fadeIn">
+      <input type="text" #login class="fadeIn" placeholder="Pseudo">
+      <input type="password" #password class="fadeIn" placeholder="Mot de passe">
+      <br><br>
+      <input type="submit" class="fadeIn" value="Valider" (click)="checkConnection()">
+    </div>
+    <div id="formFooter">
+      <a class="underlineHover">David & Charlotte</a>
+    </div>
+  </div>
+</div>
