@@ -1,9 +1,64 @@
 .all-details {
-  margin: 5%;
+  text-align: center;
   display: flex;
   flex-direction: row;
+  margin: 5%;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+.row-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2% 5% 0 5%;
+  @media (max-width: 900px) {
+    margin: 10% 5% 0 5%;
+  }
+}
+
+.card-trello {
+  width: 100%;
+  background-color: rgba(white, .8);
+  border: none;
+  padding: 2% 0 2% 5px;
+  border-radius: 10px 10px 10px 10px;
+  margin-bottom: 10%;
+  overflow: hidden;
+
+}
+
+
+.icon-check {
+  position: absolute;
+  margin-left: 15.5%;
+  margin-top: 1%;
+  color: green;
+  font-size: 90%;
+  cursor: pointer;
+}
+
+.input-trello {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: rgba(#555, .8);
+  width: 80%;
+  float: left;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    font-size: 90%;
+    color: rgba(#555, .8);
+  }
+}
+
+span {
+  color: rgba(#555, .8);
+  font-size: 14px;
 }
 
 .envie, .prestataires {
@@ -17,39 +72,101 @@
   width: 40%;
   min-height: 70vh;
   max-height: 70vh;
-  padding: 1%;
+  padding: 1% 2% 1% 2%;
   @media (max-width: 1200px) {
     overflow-y: auto;
-    max-width: 60%;
-    margin-bottom: 4%;
+    width: 80%;
+    margin: 10% 0 10% 0;
     max-height: 50vh;
   }
   @media (max-width: 900px) {
     overflow-y: auto;
     width: 100%;
-    margin-bottom: 4%;
+    margin: 10% 0 10% 0;
     max-height: 50vh;
   }
 }
 
-.envie {
+.envie, .prestataires {
   flex-direction: column;
 }
 
-.note {
-  background: green;
-  height: 42%;
+.all-prestataires {
+  height: 44%;
   margin-bottom: 2%;
 }
 
-.inspi {
+.add-prestataires {
   background: red;
   height: 41%;
 }
 
-.all-prestataires {
-  background: red;
-  height: 85%;
+.note {
+  margin-bottom: 2%;
+  height: 30%;
+}
+
+.table-todo {
+  height: 55%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: row;
+  border-radius: 10px 10px 10px 10px;
+  background: none;
+}
+
+.standby, .finish {
+  padding: 2%;
+  border: 2px solid white;
+  border-radius: 10px 10px 10px 10px;
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.standby {
+  margin-right: 1%;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  color: #555;
+  padding: 2%;
+  background: none;
+  border: 2px solid white;
+  border-radius: 10px 10px 10px 10px;
+  font-size: 90%;
+  &::placeholder {
+    font-size: 90%;
+    color: rgba(#555, .8);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.icon h6 {
+  transition: transform 0.3s ease;
+}
+
+.icon:hover h6 {
+  transform: translateX(-5px);
+}
+
+
+h5, h6 {
+  color: #555;
 }
 
 ::-webkit-scrollbar {
@@ -58,7 +175,6 @@
   background-color: #f5f5f5;
 }
 
-/* Style de la poignée (thumb) */
 ::-webkit-scrollbar-thumb {
   background-color: #555;
   border-radius: 5px;

@@ -1,14 +1,72 @@
-<div class="all-details">
+<div class="row-head">
+  <div>
+    <h5>CategorieName</h5>
+  </div>
+  <div class="icon" [routerLink]="['/todo']">
+    <h6>
+      <fa-icon [icon]="backward" class="backward"></fa-icon>
+      Retour
+    </h6>
+  </div>
+</div>
+
+<div class="all-details ">
   <div class="envie">
-    <h2>Nos Envies</h2>
+    <h5>Nos Envies</h5>
     <br>
-    <div class="note"></div>
-    <div class="inspi"></div>
+    <div class="note">
+      <textarea placeholder="Ecrivez vos envies..."></textarea>
+    </div>
+    <div class="table-todo">
+      <div class="standby">
+        <div>
+          <h6 style="margin-bottom: 10%">En attente</h6>
+          <ng-container *ngIf="checkInputNotEmpty(inputValue)">
+            <fa-icon [icon]="check" class="icon-check" (click)="addCard()"></fa-icon>
+          </ng-container>
+          <div class="card-trello">
+            <input placeholder="+ Ajouter une envie" class="input-trello" [(ngModel)]="inputValue"
+                   (keydown.enter)="addCard()"/>
+          </div>
+          <ng-container *ngFor="let card of listCard">
+            <div class="card-trello"
+                 style="border: 1px solid orange; display: flex; flex-direction: row; justify-content: space-between">
+              <div><span>{{card}}</span></div>
+              <div style="margin-right: 15%; display:flex;flex-direction: row">
+                <fa-icon [icon]="check" style="color: green;font-size: 90%;cursor: pointer;"
+                         (click)="cardFinish(card)"></fa-icon>
+                <fa-icon [icon]="trash"
+                         style="color: red; cursor: pointer;font-size: 90%;margin-left: 50%;"
+                         (click)="deleteCard(card)"></fa-icon>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="finish">
+        <div>
+          <h6 style="margin-bottom: 10%">Terminé</h6>
+          <ng-container *ngFor="let card of listCardFinish">
+            <div class="card-trello"
+                 style="border: 1px solid green; display: flex; flex-direction: row; justify-content: space-between">
+              <div><span>{{card}}</span></div>
+              <div style="margin-right: 15%;display:flex;flex-direction: row">
+                <fa-icon [icon]="undo" style="color: orange; cursor: pointer;font-size: 90%;"
+                         (click)="undoCard(card)"></fa-icon>
+                <fa-icon [icon]="trash" style="color: red; cursor: pointer;font-size: 90%;margin-left: 50%;"
+                         (click)="deleteCard(card)"></fa-icon>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="prestataires">
-    <h2>Prestataires</h2>
+    <h5>Prestataires</h5>
     <br>
     <div class="all-prestataires"></div>
+    <div class="add-prestataires"></div>
   </div>
 </div>
 

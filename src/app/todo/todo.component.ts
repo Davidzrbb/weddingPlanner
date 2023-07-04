@@ -95,7 +95,6 @@ export class TodoComponent {
       "je t'aime ... :D",
       "tu es mon bout de femmes toi",
       "staive !!",
-      "tu fais quoi ?",
       "Je suis le site internet libere moi !",
       "coucou",
       "dooodooo",
