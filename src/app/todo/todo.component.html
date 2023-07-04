@@ -5,10 +5,13 @@
   <br>
 </form>
 <div class="container all-todo">
-  <div class="wrapper" *ngIf="(categories$ | async) as categories ">
+  <div class="wrapper">
     <div class="size-wrapper" *ngFor="let category of categories">
       <div id="formContent"
-           [ngClass]="{'custom-dropdown-toggle-low custom-dropdown-toggle-unsink': !category.deleteMode && !category.state && category.priority === 'faible', 'custom-dropdown-toggle-medium custom-dropdown-toggle-unsink':!category.deleteMode && !category.state && category.priority === 'moyen', 'custom-dropdown-toggle-high custom-dropdown-toggle-unsink':!category.deleteMode && !category.state && category.priority === 'urgent','custom-dropdown-toggle-valid': category.state,'fall' : category.deleteMode}">
+           [ngClass]="{'custom-dropdown-toggle-low custom-dropdown-toggle-unsink': !category.deleteMode && !category.state
+           && category.priority === 'faible', 'custom-dropdown-toggle-medium custom-dropdown-toggle-unsink':!category.deleteMode
+           && !category.state && category.priority === 'moyen', 'custom-dropdown-toggle-high custom-dropdown-toggle-unsink':!category.deleteMode
+           && !category.state && category.priority === 'urgent','custom-dropdown-toggle-valid': category.state,'fall' : category.deleteMode}">
         <ng-container *ngIf="!category.editMode">
           <div style="width: 15%; overflow:hidden">
             <strong>
@@ -43,6 +46,9 @@
       </div>
       <br>
     </div>
+  </div>
+  <div *ngIf="categories.length ===0" style="text-align: center">
+    <p style="color:#555">{{randomMessage()}}</p>
   </div>
 </div>
 

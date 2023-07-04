@@ -9,11 +9,13 @@ import { TodoComponent } from './todo/todo.component';
 import {DecimalPipe} from '@angular/common';
 import {ReactiveFormsModule} from "@angular/forms";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { DetailComponent } from './detail/detail.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TodoComponent
+    TodoComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,

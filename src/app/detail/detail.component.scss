@@ -1,0 +1,66 @@
+.all-details {
+  margin: 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.envie, .prestataires {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: rgba(white, .5);
+  position: relative;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 40%;
+  min-height: 70vh;
+  max-height: 70vh;
+  padding: 1%;
+  @media (max-width: 1200px) {
+    overflow-y: auto;
+    max-width: 60%;
+    margin-bottom: 4%;
+    max-height: 50vh;
+  }
+  @media (max-width: 900px) {
+    overflow-y: auto;
+    width: 100%;
+    margin-bottom: 4%;
+    max-height: 50vh;
+  }
+}
+
+.envie {
+  flex-direction: column;
+}
+
+.note {
+  background: green;
+  height: 42%;
+  margin-bottom: 2%;
+}
+
+.inspi {
+  background: red;
+  height: 41%;
+}
+
+.all-prestataires {
+  background: red;
+  height: 85%;
+}
+
+::-webkit-scrollbar {
+  border-radius: 5px;
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+/* Style de la poignée (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 5px;
+}
+

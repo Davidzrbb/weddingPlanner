@@ -75,7 +75,7 @@ export class TodoComponent {
     setTimeout(() => {
       this.categories = this.categories.filter((cat) => cat !== category);
       this.categories$.next(this.categories);
-    }, 1000);
+    }, 900);
   }
 
 
@@ -88,5 +88,27 @@ export class TodoComponent {
     category.priority = priority;
     //TODO: update category in database
     this.editedCategory(category);
+  }
+
+  randomMessage() {
+    const messages = [
+      "je t'aime ... :D",
+      "tu es mon bout de femmes toi",
+      "staive !!",
+      "tu fais quoi ?",
+      "Je suis le site internet libere moi !",
+      "coucou",
+      "dooodooo",
+      "J'espère que votre journée est agréable.",
+      "t génante wsh",
+      "y a pas wshhh",
+      "13 ans c long quand meme",
+      "prout",
+      "titi + tata = <3",
+      "Je ne suis pas un magicien, mais quand je te regarde, tout le reste disparaît."
+    ];
+
+    const randomIndex = Math.floor(Math.random() * messages.length);
+    return messages[randomIndex];
   }
 }
