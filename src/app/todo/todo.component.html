@@ -15,7 +15,8 @@
         <ng-container *ngIf="!category.editMode">
           <div style="width: 15%; overflow:hidden">
             <strong>
-              <ngb-highlight [result]="category.name" [term]="filter.value" style="cursor: pointer"></ngb-highlight>
+              <ngb-highlight [result]="category.name" [term]="filter.value" style="cursor: pointer"
+                             [routerLink]="['/detail']" [queryParams]="{id: category.id}"></ngb-highlight>
             </strong>
           </div>
 

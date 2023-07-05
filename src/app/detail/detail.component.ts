@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faBackward, faCheck, faTrash, faUndo} from '@fortawesome/free-solid-svg-icons';
 import {Prestataire} from "../models/Prestataire";
 
@@ -7,7 +7,7 @@ import {Prestataire} from "../models/Prestataire";
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent {
+export class DetailComponent implements OnInit {
   backward = faBackward;
   check = faCheck;
   trash = faTrash;
@@ -16,8 +16,16 @@ export class DetailComponent {
   listCard: string[] = [];
   listCardFinish: string[] = [];
   listPrestataire: Prestataire[] = [];
+  backgroundImage: string = "";
 
   constructor() {
+  }
+
+  ngOnInit(): void {
+    this.backgroundImage = this.getRandomImageStyle();
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('id');
+    console.log(myParam)
   }
 
   checkInputNotEmpty(value: string): boolean {
@@ -53,7 +61,7 @@ export class DetailComponent {
   }
 
   addPrestataire(nom: string, contact: string, prix: string) {
-    if ((!this.checkInputNotEmpty(nom)  && !this.checkInputNotEmpty(contact))) return;
+    if ((!this.checkInputNotEmpty(nom) && !this.checkInputNotEmpty(contact))) return;
     this.listPrestataire.push(new Prestataire(nom, contact, parseInt(prix.toString())));
   }
 

@@ -20,7 +20,7 @@
     <div class="table-todo">
       <div class="standby">
         <div>
-          <h6 style="margin-bottom: 10%">En attente</h6>
+          <h6 style="margin-bottom: 10%">A faire</h6>
           <ng-container *ngIf="checkInputNotEmpty(inputValue)">
             <fa-icon [icon]="check" class="icon-check" (click)="addCard()"></fa-icon>
           </ng-container>
@@ -99,7 +99,7 @@
         </tbody>
       </table>
     </div>
-    <div class="budget" [style.background-image]="getRandomImageStyle()"></div>
+    <div class="budget" [style.background-image]="backgroundImage"></div>
   </div>
 </div>
 
