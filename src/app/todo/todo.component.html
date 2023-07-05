@@ -1,12 +1,11 @@
 <form class="wrapper-search" style="margin-top: 5%">
-  <input id="table-filtering-search" class="search__input" type="text" [formControl]="filter"
-         placeholder="Recherche"/>
+  <input id="table-filtering-search" class="search__input" type="text" [formControl]="filter" placeholder="Recherche"/>
   <br>
   <br>
 </form>
 <div class="container all-todo">
   <div class="wrapper">
-    <div class="size-wrapper" *ngFor="let category of categories">
+    <div class="size-wrapper" *ngFor="let category of filteredCategories">
       <div id="formContent"
            [ngClass]="{'custom-dropdown-toggle-low custom-dropdown-toggle-unsink': !category.deleteMode && !category.state
            && category.priority === 'faible', 'custom-dropdown-toggle-medium custom-dropdown-toggle-unsink':!category.deleteMode
@@ -15,8 +14,10 @@
         <ng-container *ngIf="!category.editMode">
           <div style="width: 15%; overflow:hidden">
             <strong>
-              <ngb-highlight [result]="category.name" [term]="filter.value" style="cursor: pointer"
-                             [routerLink]="['/detail']" [queryParams]="{id: category.id}"></ngb-highlight>
+              <ngb-highlight [result]="category.name" [term]="filter.value ? filter.value.toString() : ''"
+                             style="cursor: pointer" [routerLink]="['/detail']"
+                             [queryParams]="{id: category.id}"></ngb-highlight>
+
             </strong>
           </div>
 
@@ -48,8 +49,8 @@
       <br>
     </div>
   </div>
-  <div *ngIf="categories.length ===0" style="text-align: center">
-    <p style="color:#555">{{randomMessage()}}</p>
+  <div *ngIf="filteredCategories.length ===0" style="text-align: center">
+    <p style="color:#555">{{randomMessageStr}}</p>
   </div>
 </div>
 
