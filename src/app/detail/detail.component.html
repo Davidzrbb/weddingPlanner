@@ -65,8 +65,41 @@
   <div class="prestataires">
     <h5>Prestataires</h5>
     <br>
-    <div class="all-prestataires"></div>
-    <div class="add-prestataires"></div>
+    <div class="all-prestataires">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Nom</th>
+          <th scope="col">Contact</th>
+          <th scope="col">Prix</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let prestataire of listPrestataire; index as i">
+          <td>{{ prestataire.nom}}</td>
+          <td>{{ prestataire.contact}}</td>
+          <td>{{ prestataire.prix || (prestataire.prix !== prestataire.prix ? 0 : prestataire.prix) }}</td>
+          <td>
+            <fa-icon [icon]="trash" style="color: red; cursor: pointer;"
+                     (click)="deletePrestataire(prestataire)"></fa-icon>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="text" class="input-trello" style="border: 1px solid white;text-align: center"
+                     placeholder="Nom" #nom></td>
+          <td><input type="text" class="input-trello" style="border: 1px solid white;text-align: center"
+                     placeholder="Contact" #contact></td>
+          <td><input type="text" class="input-trello" style="border: 1px solid white;text-align: center"
+                     placeholder="Prix" #prix></td>
+          <td>
+            <fa-icon [icon]="check" style="color: green;cursor: pointer;"
+                     (click)="addPrestataire(nom.value,contact.value,prix.value);nom.value=''; contact.value=''; prix.value='';"></fa-icon>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="budget" [style.background-image]="getRandomImageStyle()"></div>
   </div>
 </div>
 

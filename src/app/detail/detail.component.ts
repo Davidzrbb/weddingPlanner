@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {faBackward, faCheck, faTrash, faUndo} from '@fortawesome/free-solid-svg-icons';
+import {Prestataire} from "../models/Prestataire";
 
 @Component({
   selector: 'app-detail',
@@ -14,6 +15,7 @@ export class DetailComponent {
   inputValue: string = "";
   listCard: string[] = [];
   listCardFinish: string[] = [];
+  listPrestataire: Prestataire[] = [];
 
   constructor() {
   }
@@ -44,5 +46,19 @@ export class DetailComponent {
   undoCard(card: string) {
     this.listCardFinish = this.listCardFinish.filter(item => item !== card);
     this.listCard.push(card);
+  }
+
+  deletePrestataire(prestataire: Prestataire) {
+    this.listPrestataire = this.listPrestataire.filter(item => item !== prestataire);
+  }
+
+  addPrestataire(nom: string, contact: string, prix: string) {
+    if ((!this.checkInputNotEmpty(nom)  && !this.checkInputNotEmpty(contact))) return;
+    this.listPrestataire.push(new Prestataire(nom, contact, parseInt(prix.toString())));
+  }
+
+  getRandomImageStyle() {
+    const randomNumber = Math.floor(Math.random() * 21) + 1;
+    return `url('../../assets/image${randomNumber}.jpg')`;
   }
 }

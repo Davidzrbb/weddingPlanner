@@ -28,7 +28,6 @@
 
 }
 
-
 .icon-check {
   position: absolute;
   margin-left: 15.5%;
@@ -36,6 +35,10 @@
   color: green;
   font-size: 90%;
   cursor: pointer;
+}
+
+.add-prestataire {
+
 }
 
 .input-trello {
@@ -87,17 +90,40 @@ span {
   }
 }
 
+td, th, tr, table {
+  background: transparent;
+}
+
+tr {
+  border-bottom: 1px solid white;
+}
+
+td {
+  overflow-x: auto;
+  max-width: 80px;
+  background: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .envie, .prestataires {
   flex-direction: column;
 }
 
 .all-prestataires {
   height: 44%;
-  margin-bottom: 2%;
+  margin-bottom: 5%;
+  overflow-y: auto;
+  font-size: 80%;
 }
 
-.add-prestataires {
-  background: red;
+
+.budget {
+  background-repeat: no-repeat;
+  background-size: 60% 100%;
+  background-position: center;
   height: 41%;
 }
 
@@ -142,11 +168,11 @@ textarea {
   background: none;
   border: 2px solid white;
   border-radius: 10px 10px 10px 10px;
-  font-size: 90%;
+
   &::placeholder {
-    font-size: 90%;
     color: rgba(#555, .8);
   }
+
   &:focus {
     outline: none;
   }
