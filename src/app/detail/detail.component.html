@@ -1,6 +1,6 @@
 <div class="row-head">
   <div>
-    <h5>CategorieName</h5>
+    <h5>{{nameCategory}}</h5>
   </div>
   <div class="icon" [routerLink]="['/todo']">
     <h6>
@@ -15,7 +15,11 @@
     <h5>Nos Envies</h5>
     <br>
     <div class="note">
-      <textarea placeholder="Ecrivez vos envies..."></textarea>
+      <ng-container *ngIf="!isSaving">
+        <fa-icon [icon]="save" class="icon-save" (click)="saveWish(textAreaElement.value)"></fa-icon>
+      </ng-container>
+      <textarea placeholder="Ecrivez vos envies..."
+                [value]="textAreaValue" #textAreaElement (input)="onTextAreaChange(textAreaElement.value)"></textarea>
     </div>
     <div class="table-todo">
       <div class="standby">
@@ -31,10 +35,10 @@
           <ng-container *ngFor="let card of listCard">
             <div class="card-trello"
                  style="border: 1px solid orange; display: flex; flex-direction: row; justify-content: space-between">
-              <div><span>{{card}}</span></div>
+              <div><span>{{card.name}}</span></div>
               <div style="margin-right: 15%; display:flex;flex-direction: row">
                 <fa-icon [icon]="check" style="color: green;font-size: 90%;cursor: pointer;"
-                         (click)="cardFinish(card)"></fa-icon>
+                         (click)="changeStateCard(card)"></fa-icon>
                 <fa-icon [icon]="trash"
                          style="color: red; cursor: pointer;font-size: 90%;margin-left: 50%;"
                          (click)="deleteCard(card)"></fa-icon>
@@ -49,10 +53,10 @@
           <ng-container *ngFor="let card of listCardFinish">
             <div class="card-trello"
                  style="border: 1px solid green; display: flex; flex-direction: row; justify-content: space-between">
-              <div><span>{{card}}</span></div>
+              <div><span>{{card.name}}</span></div>
               <div style="margin-right: 15%;display:flex;flex-direction: row">
                 <fa-icon [icon]="undo" style="color: orange; cursor: pointer;font-size: 90%;"
-                         (click)="undoCard(card)"></fa-icon>
+                         (click)="changeStateCard(card)"></fa-icon>
                 <fa-icon [icon]="trash" style="color: red; cursor: pointer;font-size: 90%;margin-left: 50%;"
                          (click)="deleteCard(card)"></fa-icon>
               </div>
@@ -76,9 +80,9 @@
         </thead>
         <tbody>
         <tr *ngFor="let prestataire of listPrestataire; index as i">
-          <td>{{ prestataire.nom}}</td>
+          <td>{{ prestataire.name}}</td>
           <td>{{ prestataire.contact}}</td>
-          <td>{{ prestataire.prix || (prestataire.prix !== prestataire.prix ? 0 : prestataire.prix) }}</td>
+          <td>{{ prestataire.price || (prestataire.price !== prestataire.price ? 0 : prestataire.price) }}</td>
           <td>
             <fa-icon [icon]="trash" style="color: red; cursor: pointer;"
                      (click)="deletePrestataire(prestataire)"></fa-icon>

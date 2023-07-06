@@ -4,22 +4,25 @@ import {map, startWith} from 'rxjs/operators';
 import {FormControl} from "@angular/forms";
 import {faPlus, faCheck, faTrash, faPencil} from '@fortawesome/free-solid-svg-icons';
 import {Categorie} from "../models/Categorie";
+import {CategoryService} from "../services/category.service";
 
 function search(text: string, categories: Categorie[]): Categorie[] {
   if (!categories) {
     return [];
   }
   const term = text.toLowerCase().trim();
-  if (term === '') {
-    return categories;
+  if (term.length > 0) { // Vérifie la longueur du terme de recherche
+    categories.forEach((category) => {
+      category.isVisible = category.name.toLowerCase().includes(term) || category.priority.toLowerCase().includes(term);
+    });
+  } else {
+    categories.forEach((category) => {
+      category.isVisible = true; // Réinitialise la visibilité si le terme de recherche est vide
+    });
   }
-  return categories.filter((category) => {
-    return (
-      category.name.toLowerCase().includes(term) ||
-      category.priority.toLowerCase().includes(term)
-    );
-  });
+  return categories;
 }
+
 
 @Component({
   selector: 'app-todo',
@@ -30,7 +33,7 @@ export class TodoComponent implements OnInit {
   @ViewChild('addInput', {static: false})
   addInput!: ElementRef<HTMLInputElement>;
 
-  constructor() {
+  constructor(private categorieService: CategoryService) {
     this.categories$ = new BehaviorSubject<Categorie[]>([]);
     this.filter.valueChanges.pipe(
       startWith(''),
@@ -42,6 +45,7 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRandomMessage();
+    this.getAllCategories()
   }
 
   /*  categories: Categorie[] = [];*/
@@ -64,7 +68,9 @@ export class TodoComponent implements OnInit {
     if (value.trim() !== "") {
       let category = new Categorie(value, this.valueSelected.toLowerCase());
       this.filteredCategories.push(category);
-      this.categories$.next(this.filteredCategories); // Update the BehaviorSubject with the new categories
+      this.categorieService.create({name: category.name, priority: category.priority, state: category.state})
+        .subscribe();
+      this.categories$.next(this.filteredCategories);
       this.addInput.nativeElement.value = '';
       this.valueSelected = 'Faible';
     }
@@ -72,10 +78,13 @@ export class TodoComponent implements OnInit {
 
   changeState(category: Categorie) {
     category.changeState();
+    this.categorieService.update(category.id, {name: category.name, priority: category.priority, state: category.state})
+      .subscribe();
   }
 
   deleteCategory(category: Categorie) {
     category.changeDeleteMode();
+    this.categorieService.delete(category.id).subscribe();
     setTimeout(() => {
       this.filteredCategories = this.filteredCategories.filter((cat) => cat !== category);
       this.categories$.next(this.filteredCategories);
@@ -89,7 +98,8 @@ export class TodoComponent implements OnInit {
   updateCategory(category: Categorie, name: string, priority: string) {
     category.name = name;
     category.priority = priority;
-    // TODO: Update category in the database
+    this.categorieService.update(category.id, {name: category.name, priority: category.priority, state: category.state})
+      .subscribe();
     this.editedCategory(category);
   }
 
@@ -116,5 +126,21 @@ export class TodoComponent implements OnInit {
 
   getRandomMessage() {
     this.randomMessageStr = this.randomMessage();
+  }
+
+  getAllCategories() {
+    //{id: 2, name: 'test', priority: 'urgent', state: true}
+    this.categorieService.getAll().subscribe((res: {
+      response:
+        [{ id: number; name: string, priority: string, state: boolean }]
+    }) => {
+      for (let i = 0; i < res.response.length; i++) {
+        let category = new Categorie(res.response[i].name, res.response[i].priority);
+        category.id = res.response[i].id;
+        category.state = res.response[i].state;
+        this.filteredCategories.push(category);
+        this.categories$.next(this.filteredCategories);
+      }
+    });
   }
 }

@@ -5,7 +5,7 @@ export class Categorie {
   state: boolean = false;
   editMode: boolean = false;
   deleteMode: boolean = false;
-
+  isVisible: boolean = true;
   constructor(name: string, state: string) {
     this.name = name;
     this.priority = state;

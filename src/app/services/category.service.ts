@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../environments/environment';
-import {HttpClient, HttpEvent, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {map, Observable} from "rxjs";
-import {Categorie} from "../models/Categorie";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReservationService {
+export class CategoryService {
 
   private urlCategory = `${environment.apiUrl}/category`;
 
@@ -15,32 +15,18 @@ export class ReservationService {
   }
 
   getAll(): Observable<any> {
-    let token = localStorage.getItem("token");
-    var header = {
-      headers: new HttpHeaders()
-        .set('Authorization', `Bearer ${token}`)
-    }
-    return this.http.get<any>(this.urlGetTotal, header).pipe(
-      map((res: { reservation: any; }) => {
-        return res.reservation;
-      }));
+    return this.http.get<any>(this.urlCategory);
   }
 
-  delete(idReservation: number) {
-    let token = localStorage.getItem("token");
-    var header = {
-      headers: new HttpHeaders()
-        .set('Authorization', `Bearer ${token}`)
-    }
-    return this.http.delete<any>(`${environment.apiUrl}/reservation/delete/${idReservation}`, header);
+  update(idCategory: number, updateCategory: { name: string; priority: string; state: boolean }) {
+    return this.http.put<any>(`${this.urlCategory}/${idCategory}`, updateCategory);
   }
 
-  create(createReservation: { amount: string; dateStarted: Date; name: string; dateEnded: Date }) {
-    let token = localStorage.getItem("token");
-    var header = {
-      headers: new HttpHeaders()
-        .set('Authorization', `Bearer ${token}`)
-    }
-    return this.http.post<any>(`${environment.apiUrl}/reservation/create`, createReservation, header);
+  delete(idCategory: number) {
+    return this.http.delete<any>(`${this.urlCategory}/${idCategory}`);
+  }
+
+  create(createCategory: { name: string; priority: string; state: boolean }) {
+    return this.http.post<any>(this.urlCategory, createCategory);
   }
 }

@@ -1,11 +1,12 @@
 export class Prestataire {
-  nom: string;
+  id?: number;
+  name: string;
   contact: string;
-  prix: number;
+  price: number;
 
   constructor(nom: string, contact: string, prix: number) {
-    this.nom = nom;
+    this.name = nom;
     this.contact = contact;
-    this.prix = prix;
+    this.price = prix;
   }
 }

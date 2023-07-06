@@ -37,8 +37,12 @@
   cursor: pointer;
 }
 
-.add-prestataire {
-
+.icon-save {
+  position: absolute;
+  margin-left: 83%;
+  margin-top: 1%;
+  color: #555;
+  cursor: pointer;
 }
 
 .input-trello {
@@ -131,7 +135,9 @@ td {
   margin-bottom: 2%;
   height: 30%;
 }
-
+textarea{
+  padding-right: 10%!important;
+}
 .table-todo {
   height: 55%;
   overflow-y: auto;

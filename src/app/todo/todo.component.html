@@ -6,7 +6,7 @@
 <div class="container all-todo">
   <div class="wrapper">
     <div class="size-wrapper" *ngFor="let category of filteredCategories">
-      <div id="formContent"
+      <div id="formContent" *ngIf="category.isVisible"
            [ngClass]="{'custom-dropdown-toggle-low custom-dropdown-toggle-unsink': !category.deleteMode && !category.state
            && category.priority === 'faible', 'custom-dropdown-toggle-medium custom-dropdown-toggle-unsink':!category.deleteMode
            && !category.state && category.priority === 'moyen', 'custom-dropdown-toggle-high custom-dropdown-toggle-unsink':!category.deleteMode
