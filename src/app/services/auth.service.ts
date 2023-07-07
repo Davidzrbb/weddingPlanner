@@ -9,7 +9,7 @@ import {Connexion} from "../models/Connexion";
   providedIn: 'root'
 })
 export class AuthService {
-
+  apiUrl: string = environment.apiUrl;
   private urlAuth = `${environment.apiUrl}/auth`;
 
   constructor(private http: HttpClient) {
