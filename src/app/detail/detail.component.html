@@ -29,7 +29,7 @@
             <fa-icon [icon]="check" class="icon-check" (click)="addCard()"></fa-icon>
           </ng-container>
           <div class="card-trello">
-            <input placeholder="+ Ajouter une envie" class="input-trello" [(ngModel)]="inputValue"
+            <input placeholder="+ Ajouter une sous tache" class="input-trello" [(ngModel)]="inputValue"
                    (keydown.enter)="addCard()"/>
           </div>
           <ng-container *ngFor="let card of listCard">

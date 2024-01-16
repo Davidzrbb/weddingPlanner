@@ -12,8 +12,8 @@
            && !category.state && category.priority === 'moyen', 'custom-dropdown-toggle-high custom-dropdown-toggle-unsink':!category.deleteMode
            && !category.state && category.priority === 'urgent','custom-dropdown-toggle-valid': category.state,'fall' : category.deleteMode}">
         <ng-container *ngIf="!category.editMode">
-          <div style="width: 15%; overflow:hidden">
-            <strong>
+          <div style="max-width: 30%; overflow: visible; word-wrap: break-word;">
+          <strong>
               <ngb-highlight [result]="category.name" [term]="filter.value ? filter.value.toString() : ''"
                              style="cursor: pointer" [routerLink]="['/detail']"
                              [queryParams]="{id: category.id}"></ngb-highlight>
@@ -21,10 +21,10 @@
             </strong>
           </div>
 
-          <div style="display: flex; flex-direction: row">
-            <fa-icon [icon]="check" style="color: green; margin-right: 80%; cursor: pointer"
+          <div style="display: flex; flex-direction: row; margin-left: 40px; position: absolute; right : 90px">
+            <fa-icon [icon]="check" style="color: green; padding-right: 80%; cursor: pointer "
                      (click)="changeState(category)"></fa-icon>
-            <fa-icon [icon]="pencil" style="margin-right: 80%;cursor: pointer ; color:orangered"
+            <fa-icon [icon]="pencil" style="padding-right: 80%;cursor: pointer ; color:orangered"
                      (click)="editedCategory(category)"></fa-icon>
             <fa-icon [icon]="trash" style="color: red; cursor: pointer" (click)="deleteCategory(category)"></fa-icon>
           </div>

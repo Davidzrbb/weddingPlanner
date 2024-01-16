@@ -48,7 +48,6 @@
 #formContent {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: rgba(white, .5);
@@ -56,7 +55,6 @@
   text-align: center;
   padding: 20px;
 }
-
 
 .size-wrapper {
   width: 90%;

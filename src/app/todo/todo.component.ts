@@ -138,9 +138,18 @@ export class TodoComponent implements OnInit {
         let category = new Categorie(res.response[i].name, res.response[i].priority);
         category.id = res.response[i].id;
         category.state = res.response[i].state;
+        console.log(res.response[i].priority)
         this.filteredCategories.push(category);
         this.categories$.next(this.filteredCategories);
       }
+      //sorted by priority this.filteredCategories
+      //urgent, moyen, faible
+      const priorityOrder = ["urgent", "moyen", "faible"];
+      this.filteredCategories.sort((a, b) => {
+        const priorityA = priorityOrder.indexOf(a.priority);
+        const priorityB = priorityOrder.indexOf(b.priority);
+        return priorityA - priorityB;
+      });
     });
   }
 }
